@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "123048090004",
+    "firebase_url": "https://home-edde7.firebaseio.com",
+    "project_id": "home-edde7",
+    "storage_bucket": "home-edde7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123048090004:android:6f85ce5c5a143c02",
+        "android_client_info": {
+          "package_name": "nerv.ruts.ac.th.midtermtungz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123048090004-dmu5iag3kc2ff7jagsqcr2fnamke3sg1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nerv.ruts.ac.th.midtermtungz",
+            "certificate_hash": "1161e4fe9d99dd18ad383fd746ec5255e31ce5d8"
+          }
+        },
+        {
+          "client_id": "123048090004-bbu4iotmlnkmgbr04dp3f0if8bc5ojbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA0puYMWdDrZ1RknLRlrYYs9B8-sVMgAo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123048090004-bbu4iotmlnkmgbr04dp3f0if8bc5ojbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
