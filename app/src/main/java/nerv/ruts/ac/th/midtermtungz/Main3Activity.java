@@ -19,14 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class Main3Activity extends AppCompatActivity {
-    TextView textuse, textpass;
+    TextView textuse, textpass,temp,sw;
 
     public FirebaseDatabase firebaseDatabase;
-    public DatabaseReference Led1,Led2,refer1;
+    public DatabaseReference Led1,Led2,Led3,Led4,refer1,refer;
     private static final String TAG = " LEDs Control";
-    public  Button sw1,sw2,btback;
+    public  Button sw1,sw2,sw3,sw4,btback;
     public String data;
-    public Integer Value,value1,value2,value_refer;
+    public Integer Value,value1,value2,value3,value4,value_refer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +36,22 @@ public class Main3Activity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         Led1 = firebaseDatabase.getReference("led1");
         Led2 = firebaseDatabase.getReference("led2");
+        Led3 = firebaseDatabase.getReference("led3");
+        Led4 = firebaseDatabase.getReference("led4");
+
+        temp = (TextView)findViewById(R.id.temp);
         textuse =(TextView)findViewById(R.id.textuser2);
         textpass=(TextView)findViewById(R.id.textpass2);
+        refer = firebaseDatabase.getReference();
         refer1 = firebaseDatabase.getReference();
         sw1=(Button)findViewById(R.id.btsw1);
         sw2=(Button)findViewById(R.id.btsw2) ;
-
+        sw3=(Button)findViewById(R.id.btsw3) ;
+        sw4=(Button)findViewById(R.id.btsw4) ;
+        sw =(TextView) findViewById(R.id.tsw);
         textuse.setText(getIntent().getStringExtra("user"));
         textpass.setText(getIntent().getStringExtra("pass"));
+
 
 
        btback=(Button)findViewById(R.id.bc);
@@ -72,6 +80,30 @@ public class Main3Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map map = (Map)dataSnapshot.getValue();
                 data = String.valueOf(map.get("led2"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        refer1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map)dataSnapshot.getValue();
+                data = String.valueOf(map.get("led3"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        refer1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map)dataSnapshot.getValue();
+                data = String.valueOf(map.get("led4"));
             }
 
             @Override
@@ -130,6 +162,82 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Led2.setValue(value2);
+            }
+        });
+        sw3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Led3.setValue(value3);
+            }
+        });
+        Led3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Value = dataSnapshot.getValue(Integer.class);
+                if (Value == 1){
+                    sw3.setText("Led3 - ON");
+                    value3=0;
+                }else {
+                    sw3.setText("Led3-OFF");
+                    value3=1;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG,"Error",databaseError.toException());
+            }
+        });
+
+        sw4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Led4.setValue(value4);
+            }
+        });
+        Led4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Value = dataSnapshot.getValue(Integer.class);
+                if (Value == 1){
+                    sw4.setText("Led4 - ON");
+                    value4=0;
+                }else {
+                    sw4.setText("Led4-OFF");
+                    value4=1;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG,"Error",databaseError.toException());
+            }
+        });
+        refer.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map) dataSnapshot.getValue();
+                data = String.valueOf(map.get("Temp"));
+                temp.setText(data);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        refer.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map) dataSnapshot.getValue();
+                data = String.valueOf(map.get("led1"));
+                sw.setText(data);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 }
